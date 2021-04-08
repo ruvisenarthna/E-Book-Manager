@@ -103,7 +103,7 @@ public class Admin_Update_Book extends AppCompatActivity {
 
                         pd.dismiss();
 
-                        Toast.makeText(Admin_Update_Book.this,"Updated Successfully",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Admin_Update_Book.this,"Book Details Updated Successfully",Toast.LENGTH_LONG).show();
 
                         startActivity(new Intent(Admin_Update_Book.this,Admin_View_Books.class));
                         finish();
