@@ -1,4 +1,4 @@
-package com.mad.e_librarymanager.admin;
+package com.mad.e_librarymanager.user;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,22 +12,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.NumberPicker;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.mad.e_librarymanager.MainActivity;
 import com.mad.e_librarymanager.R;
+import com.mad.e_librarymanager.admin.Book;
+import com.mad.e_librarymanager.user.utill.Cart;
+import com.mad.e_librarymanager.user.utill.UserBookAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Admin_View_Books extends AppCompatActivity {
+
+public class User_Main extends AppCompatActivity implements NumberPicker.OnValueChangeListener{
 
     List<Book> bookList = new ArrayList<>();
     RecyclerView recyclerView;
@@ -35,39 +40,31 @@ public class Admin_View_Books extends AppCompatActivity {
 
     FirebaseFirestore db;
 
-    CustomBookAdapter adapter;
+    UserBookAdapter adapter;
 
     ProgressDialog pd;
+    MenuItem cart=null;
 
-    FloatingActionButton mAddButton;
+    public int pickValue=0;
+    public Book selectedBook=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin__view__books);
+        setContentView(R.layout.activity_user__main);
 
-        //initialize the fireStore
         db = FirebaseFirestore.getInstance();
 
         pd = new ProgressDialog(this);
 
-        recyclerView = findViewById(R.id.booklist_recycler);
+        recyclerView = findViewById(R.id.user_book_viwe);
         //set recycler view Properties
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAddButton = findViewById(R.id.floatingAddButton);
 
-        mAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Admin_View_Books.this,Admin_Add_Book.class));
-                finish();
-            }
-        });
 
-        //show data in recycler view
         showData();
     }
 
@@ -88,7 +85,7 @@ public class Admin_View_Books extends AppCompatActivity {
                 }
 
                 //adapter
-                adapter = new CustomBookAdapter(Admin_View_Books.this,bookList);
+                adapter = new UserBookAdapter(User_Main.this,bookList);
                 //set adapter to Recycler view
                 recyclerView.setAdapter(adapter);
             }
@@ -97,34 +94,21 @@ public class Admin_View_Books extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         pd.dismiss();
-                        Toast.makeText(Admin_View_Books.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(User_Main.this,e.getMessage(),Toast.LENGTH_LONG).show();
                     }
                 });
     }
 
-    public void DeleteData(int index){
+    @Override
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+        if(picker.getValue()>0){
+            Cart.getCart().addCart(this.selectedBook,picker.getValue());
+        }
+        updateCart();
+    }
 
-        pd.setTitle("Deleting Data");
-        pd.show();
-
-        db.collection("Documents").document(bookList.get(index).getId())
-                .delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(Admin_View_Books.this,"Deleted Successfully",Toast.LENGTH_LONG).show();
-                       //update data after delete
-                        showData();
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        pd.dismiss();
-                        Toast.makeText(Admin_View_Books.this, e.getMessage(),Toast.LENGTH_LONG).show();
-                    }
-                });
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 
@@ -148,7 +132,7 @@ public class Admin_View_Books extends AppCompatActivity {
                         }
 
                         //adapter
-                        adapter = new CustomBookAdapter(Admin_View_Books.this,bookList);
+                        adapter = new UserBookAdapter(User_Main.this,bookList);
                         //set adapter to Recycler view
                         recyclerView.setAdapter(adapter);
 
@@ -158,7 +142,7 @@ public class Admin_View_Books extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         pd.dismiss();
-                        Toast.makeText(Admin_View_Books.this, e.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(User_Main.this, e.getMessage(),Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -168,9 +152,10 @@ public class Admin_View_Books extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         //infalting book_menu.xml
-        getMenuInflater().inflate(R.menu.book_menu,menu);
+        getMenuInflater().inflate(R.menu.user_menu,menu);
         //search view
         MenuItem item = menu.findItem(R.id.action_search);
+        this.cart = menu.findItem(R.id.action_cart);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -183,24 +168,40 @@ public class Admin_View_Books extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 // called when we start to type
-               // searchData(newText);
+                // searchData(newText);
+//                searchData(newText);
                 return false;
             }
         });
-
+        updateCart();
         return super.onCreateOptionsMenu(menu);
+
+
     }
 
-
-
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //handle other menu item select
-        if (item.getItemId() == R.id.action_settings){
-            Toast.makeText(this,"This Feature Will Available Soon",Toast.LENGTH_LONG).show();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_cart) {
+            if(Cart.cartList.size()>0){
+                Intent intent = new Intent(User_Main.this, ActivityCart.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(User_Main.this,"Cart Empty",Toast.LENGTH_LONG).show();
+            }
+
         }
+
         return super.onOptionsItemSelected(item);
     }
 
 
+    public void updateCart(){
+        if(Cart.cartList.size()>0){
+            this.cart.setIcon(R.drawable.ic_add_cart);
+        }else{
+            this.cart.setIcon(R.drawable.ic_cart);
+        }
+    }
 }

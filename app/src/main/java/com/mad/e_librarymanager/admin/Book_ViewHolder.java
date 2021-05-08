@@ -9,8 +9,8 @@ import com.mad.e_librarymanager.R;
 
 public class Book_ViewHolder extends RecyclerView.ViewHolder {
 
-    TextView book_id, book_title, book_author, book_price;
-    View mView;
+    public TextView book_id, book_title, book_author, book_price;
+    public View mView;
 
 
     public Book_ViewHolder(@NonNull View itemView) {

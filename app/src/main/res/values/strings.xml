@@ -30,5 +30,19 @@
 
     <string name="update_book_MainTitle">Update Book Details</string>
     <string name="update_book_submit">Update</string>
+    <string name="title_activity_user__main">User_Main</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="str_user_panel">User Panel</string>
+    <string name="search">Search</string>
+    <string name="cart">Cart</string>
+    <string name="total_0_00">Total = 0.00</string>
+    <string name="place_order">Place Order</string>
 
 </resources>
