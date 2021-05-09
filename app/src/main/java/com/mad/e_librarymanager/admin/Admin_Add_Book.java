@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -30,16 +33,29 @@ public class Admin_Add_Book extends AppCompatActivity {
 
     FirebaseFirestore db;
 
+    //veriable for validation
+    AwesomeValidation awesomeValidation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__add__book);
 
+        //initialized the view items variables
         mTextTitle = findViewById(R.id.book_add_title);
         mTextAuthor = findViewById(R.id.book_add_author);
         mTextPrice = findViewById(R.id.book_add_price);
         btnSubmit = findViewById(R.id.btn_add_submit);
         btnReset = findViewById(R.id.btn_add_reset);
+
+        //initialized variable for validation style
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+
+        //add validation for input feild
+        awesomeValidation.addValidation(this,R.id.book_add_title, RegexTemplate.NOT_EMPTY,R.string.invalid_title);
+        awesomeValidation.addValidation(this,R.id.book_add_author, RegexTemplate.NOT_EMPTY,R.string.invalid_title);
+        awesomeValidation.addValidation(this,R.id.book_add_price, RegexTemplate.NOT_EMPTY,R.string.invalid_title);
+        awesomeValidation.addValidation(this,R.id.book_add_price,RegexTemplate.TELEPHONE,R.string.invalid_number);
 
         //progress dialog
         pd = new ProgressDialog(this);
@@ -51,11 +67,18 @@ public class Admin_Add_Book extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //check validation before submit
+                if (awesomeValidation.validate()) {
+
                 String title = mTextTitle.getText().toString().trim();
                 String author = mTextAuthor.getText().toString().trim();
-                String price = mTextPrice.getText().toString().trim();
+                String price = "Rs " + mTextPrice.getText().toString().trim();
 
-                uploadData(title,author,price);
+
+                uploadData(title, author, price);
+            }else{
+                    Toast.makeText(Admin_Add_Book.this,"Validation Failed",Toast.LENGTH_LONG).show();
+                }
             }
         });
 

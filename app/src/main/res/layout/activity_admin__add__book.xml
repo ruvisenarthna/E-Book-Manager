@@ -124,7 +124,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/add_book_price_hint"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.865"
