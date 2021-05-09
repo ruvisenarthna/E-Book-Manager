@@ -1,6 +1,7 @@
 package com.mad.e_librarymanager.admin;
 
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import com.mad.e_librarymanager.R;
 
 public class Book_ViewHolder extends RecyclerView.ViewHolder {
 
+    public LinearLayout linearLayout;
     public TextView book_id, book_title, book_author, book_price;
     public View mView;
 
@@ -36,6 +38,7 @@ public class Book_ViewHolder extends RecyclerView.ViewHolder {
         });
 
         //initialize view with model layout
+        linearLayout= itemView.findViewById(R.id.linelaout);
         book_id = itemView.findViewById(R.id.view_book_id);
         book_title = itemView.findViewById(R.id.view_book_title);
         book_author = itemView.findViewById(R.id.view_book_author);
