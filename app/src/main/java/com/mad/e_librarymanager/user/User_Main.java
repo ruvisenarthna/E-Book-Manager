@@ -117,8 +117,8 @@ public class User_Main extends AppCompatActivity implements NumberPicker.OnValue
         //progress dialog
         pd.setTitle("Searching ...");
         pd.show();
-
-        db.collection("Documents").whereEqualTo("search", query.toLowerCase())
+//whereEqualTo
+        db.collection("Documents")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -127,8 +127,11 @@ public class User_Main extends AppCompatActivity implements NumberPicker.OnValue
                         bookList.clear();
                         pd.dismiss();
                         for (DocumentSnapshot doc: task.getResult()){
-                            Book book = new Book(doc.getString("id"),doc.getString("title"),doc.getString("author"),doc.getString("price"));
-                            bookList.add(book);
+                            if(doc.getString("title").toLowerCase().indexOf(query.toLowerCase())!=-1 || doc.getString("title").toLowerCase().equalsIgnoreCase(query.toLowerCase())){
+                                Book book = new Book(doc.getString("id"),doc.getString("title"),doc.getString("author"),doc.getString("price"));
+                                bookList.add(book);
+                            }
+
                         }
 
                         //adapter
