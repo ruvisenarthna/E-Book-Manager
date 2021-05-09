@@ -53,8 +53,6 @@ public class Cart {
         book =createBook(book,after.getCount(),after.getPrice());
         cartBook.add(book);
 
-
-
     }
 
 
