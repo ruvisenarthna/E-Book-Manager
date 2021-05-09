@@ -33,6 +33,8 @@ public class Admin_Add_Book extends AppCompatActivity {
 
     FirebaseFirestore db;
 
+   static int isSuccess = 0;
+
     //veriable for validation
     AwesomeValidation awesomeValidation;
 
@@ -92,38 +94,46 @@ public class Admin_Add_Book extends AppCompatActivity {
         });
     }
 
-    private void uploadData(String title, String author, String price) {
-        //set title to progress bar
-        pd.setTitle("Adding data to FireBase");
+    public int uploadData(String title, String author, String price) {
 
-        pd.show();
 
-        String id = UUID.randomUUID().toString();
 
-        Map<String, Object> doc = new HashMap<>();
-        doc.put("id",id);
-        doc.put("title",title);
-        doc.put("search", title.toLowerCase());
-        doc.put("author",author);
-        doc.put("price",price);
+            //set title to progress bar
+            pd.setTitle("Adding data to FireBase");
 
-        //add data to firebase
-        db.collection("Documents").document(id).set(doc).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                pd.dismiss();
-                Toast.makeText(Admin_Add_Book.this,"Book Details added Successfully",Toast.LENGTH_LONG).show();
+            pd.show();
 
-                startActivity(new Intent(Admin_Add_Book.this,Admin_View_Books.class));
-                finish();
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        pd.dismiss();
-                        Toast.makeText(Admin_Add_Book.this, e.getMessage(),Toast.LENGTH_LONG).show();
-                    }
-                });
+            String id = UUID.randomUUID().toString();
+
+            Map<String, Object> doc = new HashMap<>();
+            doc.put("id",id);
+            doc.put("title",title);
+            doc.put("search", title.toLowerCase());
+            doc.put("author",author);
+            doc.put("price",price);
+            isSuccess = 1;
+            //add data to firebase
+            db.collection("Documents").document(id).set(doc).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    pd.dismiss();
+                    Toast.makeText(Admin_Add_Book.this,"Book Details added Successfully",Toast.LENGTH_LONG).show();
+                    isSuccess = 1;
+                    startActivity(new Intent(Admin_Add_Book.this,Admin_View_Books.class));
+                    finish();
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            pd.dismiss();
+                            Toast.makeText(Admin_Add_Book.this, e.getMessage(),Toast.LENGTH_LONG).show();
+                            isSuccess = 0;
+                        }
+                    });
+
+
+    return isSuccess;
     }
+
 }
