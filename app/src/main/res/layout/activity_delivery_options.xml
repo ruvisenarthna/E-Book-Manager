@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg3"
+    tools:context=".deliveryOptions">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_card"
+        android:fontFamily="sans-serif-black"
+        android:text="Card Details"
+        android:textColor="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.057" />
+
+    <RadioButton
+        android:id="@+id/crdtCard"
+        android:layout_width="123dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="8dp"
+        android:text="Credit Card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.033" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="46dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038"
+        app:srcCompat="@drawable/logo" />
+
+    <RadioButton
+        android:id="@+id/dbtCard"
+        android:layout_width="104dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:text="Debit Card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toEndOf="@+id/crdtCard"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.028" />
+
+    <RadioButton
+        android:id="@+id/mstrCard"
+        android:layout_width="110dp"
+        android:layout_height="25dp"
+        android:text="Master Card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.719"
+        app:layout_constraintStart_toEndOf="@+id/dbtCard"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.045" />
+
+    <EditText
+        android:id="@+id/cardNo"
+        android:layout_width="175dp"
+        android:layout_height="43dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_card"
+        android:drawableLeft="@drawable/ic_card"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Card Number"
+        android:inputType="number"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/crdtCard"
+        app:layout_constraintVertical_bias="0.047" />
+
+    <EditText
+        android:id="@+id/cvvNo"
+        android:layout_width="175dp"
+        android:layout_height="43dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_card1"
+        android:drawableLeft="@drawable/ic_card1"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="CVV"
+        android:inputType="number"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.733"
+        app:layout_constraintStart_toEndOf="@+id/cardNo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.21" />
+
+    <EditText
+        android:id="@+id/expDate"
+        android:layout_width="175dp"
+        android:layout_height="43dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_calender"
+        android:drawableLeft="@drawable/ic_calender"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Expire Date"
+        android:inputType="date"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardNo"
+        app:layout_constraintVertical_bias="0.051" />
+
+    <Button
+        android:id="@+id/edtBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:textAllCaps="false"
+        android:background="@drawable/custom_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expDate"
+        app:layout_constraintVertical_bias="0.097" />
+
+    <Button
+        android:id="@+id/delBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:textAllCaps="false"
+        android:background="@drawable/custom_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintStart_toEndOf="@+id/edtBtn2"
+        app:layout_constraintTop_toBottomOf="@+id/expDate"
+        app:layout_constraintVertical_bias="0.094" />
+
+    <Button
+        android:id="@+id/saveBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:background="@drawable/custom_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintStart_toEndOf="@+id/delBtn2"
+        app:layout_constraintTop_toBottomOf="@+id/expDate"
+        app:layout_constraintVertical_bias="0.094" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="84dp"
+        android:layout_height="50dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="OR"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delBtn2"
+        app:layout_constraintVertical_bias="0.117" />
+
+    <RadioButton
+        android:id="@+id/cashDeliver"
+        android:layout_width="220dp"
+        android:layout_height="25dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Cash on Delivery"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.113" />
+
+    <Button
+        android:id="@+id/conBtn"
+        android:layout_width="163dp"
+        android:layout_height="56dp"
+        android:background="@drawable/custom_button"
+        android:text="Confirm and Purchase"
+        android:textAllCaps="false"
+        android:onClick="conBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cashDeliver"
+        app:layout_constraintVertical_bias="0.24" />
+
+    <Button
+        android:id="@+id/cartBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to Cart"
+        android:textAllCaps="false"
+        android:background="@drawable/custom_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conBtn"
+        app:layout_constraintVertical_bias="0.292" />
+</androidx.constraintlayout.widget.ConstraintLayout>
