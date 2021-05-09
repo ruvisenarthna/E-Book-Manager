@@ -7,6 +7,7 @@
     app:contentPadding="5dp"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
+    android:background="@drawable/background"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
