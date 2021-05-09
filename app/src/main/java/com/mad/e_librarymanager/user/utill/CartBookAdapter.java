@@ -3,6 +3,7 @@ package com.mad.e_librarymanager.user.utill;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,6 +89,7 @@ public class CartBookAdapter extends RecyclerView.Adapter<Book_ViewHolder>{
         holder.book_title.setText(bookList.get(position).getTitle());
         holder.book_author.setText(bookList.get(position).getAuthor());
         holder.book_price.setText(bookList.get(position).getPrice());
+        holder.linearLayout.setBackgroundColor(Color.WHITE);
     }
 
     @Override
