@@ -15,68 +15,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ELibraryManager">
+        <activity android:name=".shipment"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
         -->
-        <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
-
-        <activity
-            android:name=".report_details"
-            android:label="@string/title_activity_report_details">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".report_details" />
         <activity android:name=".report" />
-        <activity
-            android:name=".deliveryOptions"
-            android:label="@string/title_activity_delivery_options">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".customerDetails"
-            android:label="@string/title_activity_customer_details">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".cardDetails"
-            android:label="@string/title_activity_card_details">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".deliveryOptions" />
+        <activity android:name=".customerDetails" />
+        <activity android:name=".cardDetails" />
         <activity android:name=".user.ActivityCart" />
         <activity android:name=".user.User_Main" />
         <activity android:name=".admin.Admin_View_Books" />
         <activity android:name=".admin.Admin_Update_Book" />
         <activity android:name=".admin.Admin_Add_Book" />
-        <activity
-            android:name=".AdminDashboard"
-            android:label="@string/title_activity_admin_dashboard"
-            android:theme="@style/Theme.ELibraryManager.NoActionBar" />
+        <activity android:name=".AdminDashboard" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
