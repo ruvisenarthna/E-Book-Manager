@@ -14,7 +14,7 @@ import com.mad.e_librarymanager.user.User_Main;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_admin,btn_user;
+    Button btn_admin,btn_user,btn_ship;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
         btn_admin = findViewById(R.id.btn_admin);
         btn_user = findViewById(R.id.btn_user);
+        btn_ship=findViewById(R.id.btn_ship);
 
+        btn_ship.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,shipment.class);
+                startActivity(intent);
+            }
+        });
         btn_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
