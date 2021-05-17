@@ -44,6 +44,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.firebase:firebase-firestore:22.1.1'
     implementation 'com.google.firebase:firebase-database:19.7.0'
+    implementation 'androidx.wear:wear:1.0.0'
 
     testImplementation 'junit:junit:4.+'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
@@ -55,4 +56,5 @@ dependencies {
 
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    compileOnly 'com.google.android.wearable:wearable:2.6.0'
 }
