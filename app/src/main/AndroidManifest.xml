@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ELibraryManager">
-        <activity android:name=".user.ActivityCart"></activity>
+        <activity android:name=".About_Us"></activity>
+        <activity android:name=".user.ActivityCart" />
         <activity android:name=".user.User_Main" />
         <activity android:name=".admin.Admin_View_Books" />
         <activity android:name=".admin.Admin_Update_Book" />
