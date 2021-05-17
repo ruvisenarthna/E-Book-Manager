@@ -55,8 +55,8 @@ public class Admin_Add_Book extends AppCompatActivity {
 
         //add validation for input feild
         awesomeValidation.addValidation(this,R.id.book_add_title, RegexTemplate.NOT_EMPTY,R.string.invalid_title);
-        awesomeValidation.addValidation(this,R.id.book_add_author, RegexTemplate.NOT_EMPTY,R.string.invalid_title);
-        awesomeValidation.addValidation(this,R.id.book_add_price, RegexTemplate.NOT_EMPTY,R.string.invalid_title);
+        awesomeValidation.addValidation(this,R.id.book_add_author, RegexTemplate.NOT_EMPTY,R.string.invalid_author);
+        awesomeValidation.addValidation(this,R.id.book_add_price, RegexTemplate.NOT_EMPTY,R.string.invalid_price);
         awesomeValidation.addValidation(this,R.id.book_add_price,RegexTemplate.TELEPHONE,R.string.invalid_number);
 
         //progress dialog

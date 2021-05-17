@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -31,16 +34,30 @@ public class Admin_Update_Book extends AppCompatActivity {
 
     String pId, pTitle, pAuthor, pPrice;
 
+    //veriable for validation
+    AwesomeValidation awesomeValidation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__update__book);
 
+        //initialized the view items variables
         mTextTitle = findViewById(R.id.book_add_title);
         mTextAuthor = findViewById(R.id.book_add_author);
         mTextPrice = findViewById(R.id.book_add_price);
         btnSubmit = findViewById(R.id.btn_add_submit);
         btnReset = findViewById(R.id.btn_add_reset);
+
+        //initialized variable for validation style
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+
+        //add validation for input feild
+        awesomeValidation.addValidation(this,R.id.book_add_title, RegexTemplate.NOT_EMPTY,R.string.invalid_title);
+        awesomeValidation.addValidation(this,R.id.book_add_author, RegexTemplate.NOT_EMPTY,R.string.invalid_author);
+        awesomeValidation.addValidation(this,R.id.book_add_price, RegexTemplate.NOT_EMPTY,R.string.invalid_price);
+        awesomeValidation.addValidation(this,R.id.book_add_price,RegexTemplate.TELEPHONE,R.string.invalid_number);
+
 
         // get data from intent
         Bundle bundle = getIntent().getExtras();
@@ -69,13 +86,19 @@ public class Admin_Update_Book extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //get the update values from user
-                String id = pId;
-                String title = mTextTitle.getText().toString().trim();
-                String author = mTextAuthor.getText().toString().trim();
-                String price = mTextPrice.getText().toString().trim();
-        // function to update the data
-                updateData(id,title,author,price);
+                //check validation before submit
+                if (awesomeValidation.validate()) {
+
+                    //get the update values from user
+                    String id = pId;
+                    String title = mTextTitle.getText().toString().trim();
+                    String author = mTextAuthor.getText().toString().trim();
+                    String price = mTextPrice.getText().toString().trim();
+                    // function to update the data
+                    updateData(id, title, author, price);
+                }else{
+                    Toast.makeText(Admin_Update_Book.this,"Validation Failed",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
